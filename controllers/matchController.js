@@ -186,3 +186,18 @@ exports.deleteMatch = async (req, res) => {
     res.status(500).json({ message: "Gagal menghapus pertandingan", error: error.message });
   }
 };
+
+exports.deleteSesi = async (req, res) => {
+  try {
+    const { matchId, rantingId, pesertaId, sesiId } = req.params;
+    const match = await Match.findById(matchId);
+    if (!match) return res.status(404).json({ message: "Match tidak ditemukan" });
+    const ranting = match.ranting.id(rantingId);
+    const peserta = ranting.peserta.id(pesertaId);
+    peserta.sesiTembakan.pull(sesiId);
+    await match.save();
+    res.status(200).json({ message: "Sesi berhasil dihapus!" });
+  } catch (error) {
+    res.status(500).json({ message: "Gagal menghapus Sesi", error: error.message });
+  }
+};

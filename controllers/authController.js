@@ -49,3 +49,16 @@ exports.checkStatus = async (req, res) => {
     res.status(500).json({ message: "error" });
   }
 };
+
+exports.deleteAccount = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const deletedUser = await User.findByIdAndDelete(id);
+    if (!deletedUser) {
+      return res.status(404).json({ message: "Akun tidak ditemukan!" });
+    }
+    res.status(200).json({ message: "Akun berhasil dihapus!" });
+  } catch (error) {
+    res.status(500).json({ message: "Server Error", error: error.message });
+  }
+};

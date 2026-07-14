@@ -11,7 +11,8 @@ const {
   addSesi,
   updateSesiScore,
   deleteMatch,
-  shareMatch
+  shareMatch,
+  deleteSesi
 } = require('../controllers/matchController');
 
 router.post('/create-match', createMatch);
@@ -23,6 +24,7 @@ router.post('/:matchId/ranting/:rantingId/add-peserta', addPeserta);
 router.post('/:matchId/ranting/:rantingId/peserta/:pesertaId/add-sesi', addSesi);
 router.put('/:matchId/ranting/:rantingId/peserta/:pesertaId/sesi/:sesiId/update-score', updateSesiScore);
 router.delete('/:id', deleteMatch);
-router.post('/:matchId/share', shareMatch); 
+router.post('/:matchId/share', shareMatch);
+router.delete('/:matchId/ranting/:rantingId/peserta/:pesertaId/sesi/:sesiId', deleteSesi);
 
 module.exports = router;
