@@ -7,6 +7,7 @@ const authRoutes = require('./routes/authRoutes');
 const adminRoutes = require('./routes/adminRoutes');
 const matchRoutes = require('./routes/matchRoutes');
 const scanRoutes = require('./routes/scanRoutes');
+const trainingRoutes = require('./routes/trainingRoutes');
 
 const app = express();
 
@@ -17,9 +18,10 @@ app.use('/uploads', express.static('uploads'));
 connectDB();
 
 app.use('/api/auth', authRoutes);
-app.use('/api/admin', adminRoutes); 
+app.use('/api/admin', adminRoutes);
 app.use('/api/match', matchRoutes);
 app.use('/api/scan', scanRoutes);
+app.use('/api/training', trainingRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

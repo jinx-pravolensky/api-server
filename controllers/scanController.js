@@ -16,7 +16,6 @@ exports.processScan = async (req, res) => {
     formData.append('image', fs.createReadStream(req.file.path));
     const discipline = req.body.discipline || 'rifle';
     formData.append('discipline', discipline);
-
     const pythonApiUrl = 'http://127.0.0.1:5000/api/scan';
     const pythonResponse = await axios.post(pythonApiUrl, formData, {
       headers: {
