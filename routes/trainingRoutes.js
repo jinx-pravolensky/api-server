@@ -7,15 +7,16 @@ const {
   getTrainingById,
   addSesi,
   updateSesiScore,
-  deleteTraining
+  deleteTraining,
+  deleteSesi
 } = require('../controllers/trainingController');
 
-// URL Endpoint Latihan User
 router.post('/create', createTraining);
 router.get('/user/:userId', getTrainingsByUser);
 router.get('/:id', getTrainingById);
 router.post('/:trainingId/add-sesi', addSesi);
 router.put('/:trainingId/sesi/:sesiId/update-score', updateSesiScore);
 router.delete('/:id', deleteTraining);
+router.delete('/:trainingId/sesi/:sesiId', deleteSesi);
 
 module.exports = router;

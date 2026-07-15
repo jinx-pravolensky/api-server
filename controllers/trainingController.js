@@ -95,3 +95,16 @@ exports.deleteTraining = async (req, res) => {
         res.status(500).json({ message: "Gagal menghapus Latihan", error: error.message });
     }
 };
+
+exports.deleteSesi = async (req, res) => {
+    try {
+        const { trainingId, sesiId } = req.params;
+        const training = await Training.findById(trainingId);
+        if (!training) return res.status(404).json({ message: "Latihan tidak ditemukan" });
+        training.sesiTembakan.pull(sesiId);
+        await training.save();
+        res.status(200).json({ message: "Sesi berhasil dihapus!" });
+    } catch (error) {
+        res.status(500).json({ message: "Gagal menghapus Sesi", error: error.message });
+    }
+};
